@@ -5,6 +5,12 @@ Here is a simple flow chart:
     participant browser
     participant server
 
+    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
+    Note right of browser: A Post request was sent to server after click on Save
+    activate server
+    server-->>browser: Response with HTTP status 302 which means do a new HTTP GET request for endpoint /notes
+    deactivate server
+
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
     activate server
     server-->>browser: HTML document
